@@ -7,20 +7,18 @@ def extractImages(pathIn, pathOut, camera_name):
     count = 0
     vidcap = cv2.VideoCapture(pathIn)
     success,image = vidcap.read()
-    success = True
     while success:
-        vidcap.set(cv2.CAP_PROP_POS_MSEC,(count*1000))    # added this line
+        cv2.imwrite(pathOut + f"/{count}_{camera_name}.jpg", image)  # save frame as JPEG file
         success,image = vidcap.read()
         print ('Read a new frame: ', success)
-        cv2.imwrite( pathOut + f"/{count}_{camera_name}.jpg", image)     # save frame as JPEG file
         count = count + 1
 
 
 if __name__ == "__main__":
     avis_path = '/data/shared-data/scalpel/kristina/Algs/YOLOV5/data/video/video as avi'
-    dest_path = '/data/shared-data/scalpel/MyDigitalNurse/all_data'
+    dest_path = '/data/shared-data/scalpel/MyDigitalNurse2/all_data'
     videos = os.listdir(avis_path)
-    
+
     for sur in videos:
         sur_name = sur.split('.')[0]
         sur_path  = os.path.join(dest_path,sur_name)
